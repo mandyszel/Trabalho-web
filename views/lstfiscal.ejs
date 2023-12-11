@@ -1,0 +1,24 @@
+<%-include('cabecalho.ejs')%>
+
+<form method="post">
+    <input type="text" name="pesquisar" id="pesquisar">
+    <input type="submit" value="Pesquisar">
+</form>
+
+
+<table>
+    <tr>
+        <th>Ano da Eleição</th>
+        <th>Editar</th>
+        <th>Delete</th>
+    </tr>
+
+    <%eleicao.forEach(function(eleicao){%>
+    <tr>
+        <td><%=eleicao.eleicano%></td>
+        <td><a href="/edteleicao/<%=eleicao._id%>">Editar</a></td>
+        <td><a href="/deleleicao/<%=eleicao._id%>">Delete</a></td>
+    </tr>
+    <% }) %>
+</table>
+<%-include('rodape.ejs')%>

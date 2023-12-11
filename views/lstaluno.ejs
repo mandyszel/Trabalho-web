@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Eleitores</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Titulo</th>
+            <th>cpf</th>
+            <th>Filiação</th>
+            <th>Endereço</th>
+            <th>Data Nascimento</th>
+            <th>Seção</th>
+
+        </tr>
+
+        <%Eleitores.forEach(function(eleitor){%>
+            <tr>
+                <td><%=eleitor.nome%></td>
+                <td><%=eleitor.titulo%></td>
+                <td><%=eleitor.cpf%></td>
+                <td><%=eleitor.filiacao%></td>
+                <td><%=eleitor.end%></td>
+                <td><%=eleitor.datanasc%></td>
+                <td><%=eleitor.localvota.secao%></td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<%-include('cabecalho.ejs')%>
+<form method="post">
+    <label for="id">Id</label>
+    <input type="number" name="id" id="id" required readonly value="<%=eleicao._id%>"><br>
+    <label for="eleicano">Ano da Eleição</label>
+    <input type="number" name="eleicano" id="eleicano" required placeholder="Digite o Ano da Eleição." value="<%=eleicao.eleicano%>"><br>
+    <input type="submit" value="Adicionar">
+</form>
+<%-include('rodape.ejs')%>

@@ -1,0 +1,34 @@
+<%-include('cabecalho.ejs')%>
+
+<form method="post">
+    <input type="text" name="pesquisar" id="pesquisar">
+    <input type="submit" value="Pesquisar">
+</form>
+
+
+<table>
+    <tr>
+        <th>Número Vaga</th>
+        <th>Presidente</th>
+        <th>Governador</th>
+        <th>Senador</th>
+        <th>Deputado Federal </th>
+        <th>Deputado Estadual</th>
+        <th>Editar</th>
+        <th>Delete</th>
+    </tr>
+
+    <%vaga.forEach(function(vaga){%>
+    <tr>
+        <td><%=vaga.nmrvaga%></td>
+        <td><%=vaga.presidente%></td>
+        <td><%=vaga.governador%></td>
+        <td><%=vaga.senador%></td>
+        <td><%=vaga.depfed%></td>
+        <td><%=vaga.depestad%></td>
+        <td><a href="/edtvaga/<%=vaga._id%>">Editar</a></td>
+        <td><a href="/delvaga/<%=vaga._id%>">Delete</a></td>
+    </tr>
+    <% }) %>
+</table>
+<%-include('rodape.ejs')%>
