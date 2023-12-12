@@ -2,6 +2,7 @@ const Aluno = require("../models/Aluno");
 const Equipe = require("../models/Equipe");
 const Fiscal = require("../models/Fiscal"); // Certifique-se de ter importado corretamente o modelo Fiscal
 const Atividade = require("../models/Atividade");
+const { Error } = require("mongoose");
 
 
 function abreindex(req, res) {
@@ -26,16 +27,32 @@ function addaluno(req, res) {
     cpf: cpf,
     email: email,
   });
-
-  aluno.save().then(function (docs) {
-    res.send("Salvo");
+  aluno.save().then(function (docs, err) {
+    console.log(docs);
+    res.redirect("/addaluno");
   });
 }
 
 function listar(req, res) {
-  Aluno.find({}).then(function (alunos) {
-    res.render("lstaluno.ejs", { Alunos: alunos });
+  Aluno.find({}).then(function (alunos,err) {
+    if(err){
+      res.send(err.message)
+    }else{
+    res.render("lstaluno.ejs", { alunos: alunos });
+    }
   });
+}
+
+function pesquisaaluno(req, res) {
+  Aluno
+    .find({ nome: new RegExp(req.body.pesquisar, "i") })
+    .then(function (equipe, err) {
+      if (err) {
+        res.send(err.message);
+      } else {
+        res.render("lstaluno.ejs", { aluno: aluno });
+      }
+    });
 }
 
 function abreaddequipe(req, res) {
@@ -292,6 +309,7 @@ module.exports = {
   abrealuno,
   addaluno,
   listar,
+  pesquisaaluno,
   abreaddequipe,
   addequipe,
   lstequipe,

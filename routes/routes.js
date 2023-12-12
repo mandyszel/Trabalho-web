@@ -11,6 +11,12 @@ router.get("/", function(req, res) {
 router.get("/addaluno", controller.abrealuno);
 router.post("/addaluno", upload.single("foto"), controller.addaluno);
 router.get("/lstaluno", controller.listar);
+router.post("/lstaluno",controller.pesquisaaluno)
+
+/*router.get("/edtaluno/:id", controller.abreedtaluno);
+router.post("/edtaluno/:id", controller.edtaluno);
+router.get("/delaluno/:id", controller.delaluno);*/
+
 
 router.get("/addequipe", controller.abreaddequipe);
 router.post("/addequipe", controller.addequipe);
