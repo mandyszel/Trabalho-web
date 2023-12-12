@@ -1,6 +1,6 @@
 const Aluno = require("../models/Aluno");
-const Equipe = require("../models/Equipe");
-const Fiscal = require("../models/Fiscal");
+const equipe = require("../models/equipe");
+const fiscal = require("../models/fiscal");
 const Atividade = require("../models/Atividade")
 
 function abreindex(req, res) {
@@ -18,7 +18,7 @@ function addaluno(req, res) {
   let cpf = req.body.cpf;
   let email = req.body.email;
 
-  let eleitor = new Aluno({
+  let aluno = new Aluno({
     matricula: matricula,
     nome: nome,
     identidade: identidade,
@@ -60,7 +60,7 @@ function lstequipe(req, res) {
     if (err) {
       res.send(err.message);
     } else {
-      res.render("lstequipe.ejs", { Equipe: equipe });
+      res.render("lstequipe.ejs", { equipe: equipe });
     }
   });
 }
@@ -72,7 +72,7 @@ function pesquisaequipe(req, res) {
       if (err) {
         res.send(err.message);
       } else {
-        res.render("lstequipe.ejs", { Equipe: equipe });
+        res.render("lstequipe.ejs", { equipe: equipe });
       }
     });
 }
@@ -82,7 +82,7 @@ function abreedtequipe(req, res) {
     if (err) {
       res.send(err.message);
     } else {
-      res.render("edtequipe.ejs", { Equipe: equipe });
+      res.render("edtequipe.ejs", { equipe: equipe });
     }
   });
 }
@@ -120,12 +120,12 @@ function abreaddfiscal(req, res) {
     if (err) {
       res.send(err.message);
     } else {
-      res.render("addfiscal.ejs", { Fiscal: fiscal });
+      res.render("addfiscal.ejs", { fiscal: fiscal });
     }
   });
 }
 
-function addefiscal(req, res) {
+function addfiscal(req, res) {
   let fiscal = new Fiscal({
     fiscalidentificador: req.body.fiscalidentificador,
     nome: req.body.nome
@@ -141,7 +141,7 @@ function lstfiscal(req, res) {
     if (err) {
       res.send(err.message);
     } else {
-      res.render("lstfiscal.ejs", { Fiscal: fiscal });
+      res.render("lstfiscal.ejs", { fiscal: fiscal });
     }
   });
 }
@@ -153,7 +153,7 @@ function pesquisafiscal(req, res) {
       if (err) {
         res.send(err.message);
       } else {
-        res.render("lstfiscal.ejs", { Fiscal: fiscal });
+        res.render("lstfiscal.ejs", { fiscal: fiscal });
       }
     });
 }
@@ -163,7 +163,7 @@ function abreedtfiscal(req, res) {
     if (err) {
       res.send(err.message);
     } else {
-      res.render("edtfiscal.ejs", { Fiscal: fiscal });
+      res.render("edtfiscal.ejs", { fiscal: fiscal });
     }
   });
 }
@@ -192,6 +192,100 @@ function delfiscal(req, res) {
   });
 }
 
+function abreaddatividade(req, res) {
+  atividade.find({}).then(function (atividade, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.render("addatividade.ejs", { atividade: atividade });
+    }
+  });
+}
+
+function addatividade(req, res) {
+  let atividade = new Atividade({
+    atividadeidentificador: req.body.atividadeidentificador,
+    nome: req.body.nome,
+    duracao: req.body.duracao,
+    local: req.body.local,
+    pontuacao: req.body.pontuacao,
+    numparticipantes: req.body.numparticipantes,
+    ano: req.body.ano
+  });
+  atividade.save().then(function (docs, err) {
+    if (err) {
+      console.log(err);
+      res.send(err.message);
+    } else {
+      console.log(docs);
+      res.redirect("/addatividade");
+    }
+  });
+}
+
+function lstatividade(req, res) {
+  atividade.find({}).then(function (atividade, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.render("lstatividade.ejs", { atividade: atividade });
+    }
+  });
+}
+
+function pesquisaatividade(req, res) {
+  atividade
+    .find({ atividadeidentificador: new RegExp(req.body.pesquisar, "i") })
+    .then(function (atividade, err) {
+      if (err) {
+        res.send(err.message);
+      } else {
+        res.render("lstatividade.ejs", { atividade: atividade });
+      }
+    });
+}
+
+function abreedtatividade(req, res) {
+  atividade.findById(req.params.id).then(function (atividade, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.render("edtatividade.ejs", { Atividade: atividade });
+    }
+  });
+}
+
+function edtatividade(req, res) {
+  atividade
+    .findByIdAndUpdate(req.params.id, {
+      atividadeidentificador: req.body.atividadeidentificador,
+      nome: req.body.nome,
+      duracao: req.body.duracao,
+      local: req.body.local,
+      pontuacao: req.body.pontuacao,
+      numparticipantes: req.body.numparticipantes,
+      ano: req.body.ano
+    })
+    .then(function (atividade, err) {
+      if (err) {
+        res.send(err.message);
+      } else {
+        res.redirect("/lstatividade");
+      }
+    });
+}
+
+function delatividade(req, res) {
+  atividade.findByIdAndDelete(req.params.id).then(function (atividade, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.redirect("/lstatividade");
+    }
+  });
+}
+
+
 module.exports = {
   abreindex,
   abrealuno,
@@ -205,10 +299,17 @@ module.exports = {
   abreedtequipe,
   edtequipe,
   abreaddfiscal,
-  addefiscal,
+  addfiscal,
   lstfiscal,
   pesquisafiscal,
   delfiscal,
   abreedtfiscal,
   edtfiscal,
+  abreaddatividade,
+  addatividade,
+  lstatividade,
+  pesquisaatividade,
+  abreedtatividade,
+  edtatividade,
+  delatividade
 };

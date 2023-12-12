@@ -6,10 +6,9 @@ const upload = multer({ dest: "./public" });
 
 router.get("/", controller.abreindex);
 
-// Rota para abrir formulário de adicionar aluno
 router.get("/addaluno", controller.abrealuno);
 router.post("/addaluno", upload.single("foto"), controller.addaluno);
-router.get("/lstaluno", controller.listaraluno);
+router.get("/lstaluno", controller.listar);
 
 router.get("/addequipe", controller.abreaddequipe);
 router.post("/addequipe", controller.addequipe);
@@ -28,10 +27,10 @@ router.post("/edtfiscal/:id", controller.edtfiscal);
 router.get("/delfiscal/:id", controller.delfiscal);
 
 
-router.get("/addatividade", controller.abreatividade);
+router.get("/addatividade", controller.abreaddatividade);
 router.post("/addatividade", controller.addatividade);
-router.get("/lstatividade", controller.listaratividade);
-router.post("/lstatividade", controller.pesquisaratividade);
+router.get("/lstatividade", controller.lstatividade);
+router.post("/lstatividade", controller.pesquisaatividade);
 router.get("/edtatividade/:id", controller.abreedtatividade);
 router.post("/edtatividade/:id", controller.edtatividade);
 router.get("/delatividade/:id", controller.delatividade);
