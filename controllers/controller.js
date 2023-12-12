@@ -1,6 +1,7 @@
-const Eleitor = require("../models/Aluno");
-const vaga = require("../models/Equipe");
-const eleicao = require("../models/Fiscal");
+const Aluno = require("../models/Aluno");
+const Equipe = require("../models/Equipe");
+const Fiscal = require("../models/Fiscal");
+const Atividade = require("../models/Atividade")
 
 function abreindex(req, res) {
   res.render("index");

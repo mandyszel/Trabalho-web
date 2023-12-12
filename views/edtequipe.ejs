@@ -1,19 +1,24 @@
 <%-include('cabecalho.ejs')%>
 <form method="post">
+
     <label for="id">Id</label>
-    <input type="number" name="id" id="id" required readonly value="<%=vaga._id%>"><br>
-    <label for="nmrvaga">Número Vaga</label>
-    <input type="number" name="nome" id="nome" required placeholder="Digite o Número da Vaga." value="<%=vaga.nmrvaga%>"><br>
-    <label for="presidente">Presidente</label>
-    <input type="number" name="presidente" id="presidente" required placeholder="Digite o numero do presidente em que deseja votar:"value="<%=vaga.presidente%>"><br>
-    <label for="governador">Governador</label>
-    <input type="number" name="governador" id="governador" required placeholder="Digite o numero do governador em que deseja votar:"value="<%=vaga.governador%>"><br>
-    <label for="senador">Senador</label>
-    <input type="number" name="senador" id="senador" required placeholder="Digite o numero do senador em que deseja votar:"value="<%=vaga.senador%>"><br>
-    <label for="depfed">Deputado Federal</label>
-    <input type="number" name="depfed" id="depfed" required placeholder="Digite o numero do deputado federal em que deseja votar:"value="<%=vaga.depfed%>"><br>
-    <label for="depestad">Deputado Estadual</label>
-    <input type="number" name="depestad" id="depestad" required placeholder="Digite o numero do deputado estadual em que deseja votar:"value="<%=vaga.depestad%>"><br>
+    <input type="number" name="id" id="id" required readonly value="<%=equipe._id%>"><br>
+    
+    <label for="equipeidentificador">Identificador</label>
+    <input type="number" name="identificador" id="identificador" required placeholder="Informe o númeor identificador" value="<%=equipe.equipeidentificador%>"><br>
+   
+    <label for="nome">Nome</label> 
+    <input type="text" name="nome" id="nome" required placeholder="Informe o nome da equipe"value="<%=equipe.nome%>"><br>
+    
+    <label for="cor">Cor</label>
+    <input type="text" name="cor" id="nome" required ="Infomr  cor da equipe" value="<%=equipe.cor%>"><br>
+    
+    <label for="ano">Ano</label>
+    <input type="date" name="ano" id="ano" required="Informe o ano" value="<%=equipe.ano%>"><br>
+    
+    <label for="integrantes">Número de integrantes</label>
+    <input type="number" name="integrantes" id="integrantes" required="Informe o número de integrantes" value="<%=equipe.integrantes%>"><br>
+    
     <input type="submit" value="Adicionar">
 </form>
 <%-include('rodape.ejs')%>

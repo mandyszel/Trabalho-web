@@ -8,16 +8,18 @@
 
 <table>
     <tr>
-        <th>Ano da Eleição</th>
+        <th>Identificador</th>
+        <th>Nome</th>
         <th>Editar</th>
         <th>Delete</th>
     </tr>
 
-    <%eleicao.forEach(function(eleicao){%>
+    <%fiscal.forEach(function(fiscal){%>
     <tr>
-        <td><%=eleicao.eleicano%></td>
-        <td><a href="/edteleicao/<%=eleicao._id%>">Editar</a></td>
-        <td><a href="/deleleicao/<%=eleicao._id%>">Delete</a></td>
+        <td><%=fiscal.fiscalidentificador%></td>
+        <td><%=fiscal.nome%></td>
+        <td><a href="/edtfiscal/<%=fiscal._id%>">Editar</a></td>
+        <td><a href="/delfiscal/<%=fiscal._id%>">Delete</a></td>
     </tr>
     <% }) %>
 </table>

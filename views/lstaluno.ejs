@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem de Eleitores</title>
+    <title>Listagem de Alunos</title>
 </head>
 <body>
     <table>
         <tr>
+            <th>Matricula</th>
             <th>Nome</th>
-            <th>Titulo</th>
-            <th>cpf</th>
-            <th>Filiação</th>
-            <th>Endereço</th>
-            <th>Data Nascimento</th>
-            <th>Seção</th>
-
+            <th>Identidade</th>
+            <th>Cpf</th>
+            <th>Email</th>
         </tr>
 
-        <%Eleitores.forEach(function(eleitor){%>
+        <%Alunos.forEach(function(aluno){%>
             <tr>
-                <td><%=eleitor.nome%></td>
-                <td><%=eleitor.titulo%></td>
-                <td><%=eleitor.cpf%></td>
-                <td><%=eleitor.filiacao%></td>
-                <td><%=eleitor.end%></td>
-                <td><%=eleitor.datanasc%></td>
-                <td><%=eleitor.localvota.secao%></td>
+                <td><%=aluno.matricula%></td>
+                <td><%=aluno.titulo%></td>
+                <td><%=aluno.nome%></td>
+                <td><%=aluno.identidade%></td>
+                <td><%=aluno.cpf%></td>
+                <td><%=aluno.email%></td>
             </tr>
         <% }) %>
     </table>

@@ -8,26 +8,23 @@
 
 <table>
     <tr>
-        <th>Número Vaga</th>
-        <th>Presidente</th>
-        <th>Governador</th>
-        <th>Senador</th>
-        <th>Deputado Federal </th>
-        <th>Deputado Estadual</th>
-        <th>Editar</th>
-        <th>Delete</th>
+        <th>Identificador</th>
+        <th>Nome</th>
+        <th>Cor</th>
+        <th>Ano</th>
+        <th>Integrantes</th>
+        
     </tr>
 
-    <%vaga.forEach(function(vaga){%>
+    <%equipe.forEach(function(equipe){%>
     <tr>
-        <td><%=vaga.nmrvaga%></td>
-        <td><%=vaga.presidente%></td>
-        <td><%=vaga.governador%></td>
-        <td><%=vaga.senador%></td>
-        <td><%=vaga.depfed%></td>
-        <td><%=vaga.depestad%></td>
-        <td><a href="/edtvaga/<%=vaga._id%>">Editar</a></td>
-        <td><a href="/delvaga/<%=vaga._id%>">Delete</a></td>
+        <td><%=equipe.equipeidentificador%></td>
+        <td><%=equipe.nome%></td>
+        <td><%=equipe.cor%></td>
+        <td><%=equipe.ano%></td>
+        <td><%=equipe.integrantes%></td>
+        <td><a href="/edtequipe/<%=equipe._id%>">Editar</a></td>
+        <td><a href="/delequipe/<%=equipe._id%>">Delete</a></td>
     </tr>
     <% }) %>
 </table>

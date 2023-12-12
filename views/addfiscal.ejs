@@ -1,7 +1,11 @@
 <%-include('cabecalho.ejs')%>
 <form method="post">
-    <label for="eleicano">Ano da Eleição</label>
-    <input type="number" name="eleicano" id="eleicano" required placeholder="Digite o ano Eleição."><br>
+    <label for="fiscalidentificador">Identificador</label>
+    <input type="number" name="fiscalidentificador" id="fiscalidentificador" required placeholder="Informe o número identificador"><br>
+   
+    <label for="nome">Nome</label>
+    <input type="text" name="nome" id="nome" required placeholder="Informe o nome"><br>
+   
     <input type="submit" value="Adicionar">
 </form>
 <%-include('rodape.ejs')%>

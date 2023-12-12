@@ -1,0 +1,30 @@
+<%-include('cabecalho.ejs')%>
+<form method="post">
+    
+    <label for="id">Id</label>
+    <input type="number" name="id" id="id" required readonly value="<%=atividade._id%>"><br>
+    
+    <label for="atividadeidentificador">Identificador</label>
+    <input type="number" name="identificador" id="identificador" required placeholder="Informe o número identificador da atividade" value="<%=atividade.atividadeidentificador%>"><br>
+   
+    <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" required placeholder="Informe o nome da atividade"value="<%=atividade.nome%>"><br>
+
+    <label for="duracao">Duração</label>
+    <input type="time" name="duracao" id="duracao" required placeholder="Informe a duracão da atividade" value="<%=atividade.duracao%>"><br>
+    
+    <label for="local">Local</label>
+    <input type="text" name="local" id="local" required placeholder="Informe o local da atividade" value="<%=atividade.local%>"><br>
+    
+    <label for="pontuacao">Pontuação</label>
+    <input type="number" name="pontuacao" id="pontuacao" required placeholder="Informe a pontuação da atividade"value="<%=atividade.pontuacao%>"><br>
+    
+    <label for="numparticiantes">Número de participantes</label>
+    <input type="number" name="numparticiantes" id="numparticiantes" required placeholder="Informe o  número de participantes"value="<%=atividade.numparticiantes%>"><br>
+    
+    <label for="ano">Ano</label>
+    <input type="date" name="ano" id="ano" required placeholder="Informe o ano"value="<%=atividade.ano%>"><br>
+    
+    <input type="submit" value="Adicionar">
+</form>
+<%-include('rodape.ejs')%>
