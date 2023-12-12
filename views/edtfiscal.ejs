@@ -1,4 +1,40 @@
 <%-include('cabecalho.ejs')%>
+<style>
+    form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    label {
+        margin-bottom: 5px;
+    }
+
+    input[type='text'],
+    input[type='number'],
+    input[type='date'] {
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    input[type='submit'] {
+        padding: 8px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+
+    input[type='submit']:hover {
+        background-color: #4CAF50;
+    }
+</style>
 <form method="post">
 
     <label for="id">Id</label>

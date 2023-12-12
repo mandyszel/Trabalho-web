@@ -1,4 +1,38 @@
 <%-include('cabecalho.ejs')%>
+<style>
+    form {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        width: 300px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="submit"] {
+        margin-bottom: 10px;
+        width: calc(100% - 12px);
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+</style>
 <form method="post">
     <label for="fiscalidentificador">Identificador</label>
     <input type="number" name="fiscalidentificador" id="fiscalidentificador" required placeholder="Informe o número identificador"><br>

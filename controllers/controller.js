@@ -1,7 +1,8 @@
 const Aluno = require("../models/Aluno");
-const equipe = require("../models/equipe");
-const fiscal = require("../models/fiscal");
-const Atividade = require("../models/Atividade")
+const Equipe = require("../models/Equipe");
+const Fiscal = require("../models/Fiscal"); // Certifique-se de ter importado corretamente o modelo Fiscal
+const Atividade = require("../models/Atividade");
+
 
 function abreindex(req, res) {
   res.render("index");
@@ -56,7 +57,7 @@ function addequipe(req, res) {
 }
 
 function lstequipe(req, res) {
-  equipe.find({}).then(function (equipe, err) {
+  Equipe.find({}).then(function (equipe, err) {
     if (err) {
       res.send(err.message);
     } else {
@@ -66,7 +67,7 @@ function lstequipe(req, res) {
 }
 
 function pesquisaequipe(req, res) {
-  equipe
+  Equipe
     .find({ nome: new RegExp(req.body.pesquisar, "i") })
     .then(function (equipe, err) {
       if (err) {
@@ -78,7 +79,7 @@ function pesquisaequipe(req, res) {
 }
 
 function abreedtequipe(req, res) {
-  equipe.findById(req.params.id).then(function (equipe, err) {
+  Equipe.findById(req.params.id).then(function (equipe, err) {
     if (err) {
       res.send(err.message);
     } else {
@@ -116,7 +117,7 @@ function delequipe(req, res) {
 }
 
 function abreaddfiscal(req, res) {
-  fiscal.find({}).then(function (fiscal, err) {
+  Fiscal.find({}).then(function (fiscal, err) { // Use o modelo Fiscal aqui, em vez de usar `fiscal.find({})`
     if (err) {
       res.send(err.message);
     } else {
@@ -137,7 +138,7 @@ function addfiscal(req, res) {
 }
 
 function lstfiscal(req, res) {
-  fiscal.find({}).then(function (fiscal, err) {
+  Fiscal.find({}).then(function (fiscal, err) { 
     if (err) {
       res.send(err.message);
     } else {
@@ -147,7 +148,7 @@ function lstfiscal(req, res) {
 }
 
 function pesquisafiscal(req, res) {
-  fiscal
+  Fiscal
     .find({ fiscalidentificador: new RegExp(req.body.pesquisar, "i") })
     .then(function (fiscal, err) {
       if (err) {
@@ -159,7 +160,7 @@ function pesquisafiscal(req, res) {
 }
 
 function abreedtfiscal(req, res) {
-  fiscal.findById(req.params.id).then(function (fiscal, err) {
+  Fiscal.findById(req.params.id).then(function (fiscal, err) {
     if (err) {
       res.send(err.message);
     } else {
@@ -169,7 +170,7 @@ function abreedtfiscal(req, res) {
 }
 
 function edtfiscal(req, res) {
-  fiscal
+  Fiscal
     .findByIdAndUpdate(req.params.id, {
       fiscalidentificador: req.body.fiscalidentificador,
     })
@@ -183,7 +184,7 @@ function edtfiscal(req, res) {
 }
 
 function delfiscal(req, res) {
-  fiscal.findByIdAndDelete(req.params.id).then(function (fiscal, err) {
+  Fiscal.findByIdAndDelete(req.params.id).then(function (fiscal, err) {
     if (err) {
       res.send(err.message);
     } else {
@@ -193,7 +194,7 @@ function delfiscal(req, res) {
 }
 
 function abreaddatividade(req, res) {
-  atividade.find({}).then(function (atividade, err) {
+  Atividade.find({}).then(function (atividade, err) {
     if (err) {
       res.send(err.message);
     } else {
@@ -224,7 +225,7 @@ function addatividade(req, res) {
 }
 
 function lstatividade(req, res) {
-  atividade.find({}).then(function (atividade, err) {
+  Atividade.find({}).then(function (atividade, err) {
     if (err) {
       res.send(err.message);
     } else {
@@ -234,7 +235,7 @@ function lstatividade(req, res) {
 }
 
 function pesquisaatividade(req, res) {
-  atividade
+  Atividade
     .find({ atividadeidentificador: new RegExp(req.body.pesquisar, "i") })
     .then(function (atividade, err) {
       if (err) {
@@ -246,7 +247,7 @@ function pesquisaatividade(req, res) {
 }
 
 function abreedtatividade(req, res) {
-  atividade.findById(req.params.id).then(function (atividade, err) {
+  Atividade.findById(req.params.id).then(function (atividade, err) {
     if (err) {
       res.send(err.message);
     } else {
@@ -256,7 +257,7 @@ function abreedtatividade(req, res) {
 }
 
 function edtatividade(req, res) {
-  atividade
+  Atividade
     .findByIdAndUpdate(req.params.id, {
       atividadeidentificador: req.body.atividadeidentificador,
       nome: req.body.nome,
@@ -276,7 +277,7 @@ function edtatividade(req, res) {
 }
 
 function delatividade(req, res) {
-  atividade.findByIdAndDelete(req.params.id).then(function (atividade, err) {
+  Atividade.findByIdAndDelete(req.params.id).then(function (atividade, err) {
     if (err) {
       res.send(err.message);
     } else {

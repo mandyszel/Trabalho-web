@@ -1,10 +1,54 @@
-<%-include('cabecalho.ejs')%>
+<%- include('cabecalho.ejs') %>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    form {
+        width: 300px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="submit"] {
+        margin-bottom: 10px;
+        width: calc(100% - 12px);
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
 
 <form method="post">
     <input type="text" name="pesquisar" id="pesquisar">
     <input type="submit" value="Pesquisar">
 </form>
-
 
 <table>
     <tr>
@@ -14,23 +58,24 @@
         <th>Local</th>
         <th>Pontuação</th>
         <th>Número de participantes</th>
-        <th>ano</th>
-
+        <th>Ano</th>
+        <th>Editar</th>
+        <th>Delete</th>
     </tr>
 
-    <%atividade.forEach(function(atividade){%>
-    <tr>
-        <td><%=atividade.atividadeidentificador%></td>
-        <td><%=atividade.nome%></td>
-        <td><%=atividade.duracao%></td>
-        <td><%=atividade.local%></td>
-        <td><%=atividade.pontuacao%></td>
-        <td><%=atividade.numparticipantes%></td>
-        <td><%=atividade.ano%></td>
-
-        <td><a href="/edtatividade/<%=atividade._id%>">Editar</a></td>
-        <td><a href="/delatividade/<%=atividade._id%>">Delete</a></td>
-    </tr>
+    <% atividade.forEach(function(atividade) { %>
+        <tr>
+            <td><%= atividade.atividadeidentificador %></td>
+            <td><%= atividade.nome %></td>
+            <td><%= atividade.duracao %></td>
+            <td><%= atividade.local %></td>
+            <td><%= atividade.pontuacao %></td>
+            <td><%= atividade.numparticipantes %></td>
+            <td><%= atividade.ano %></td>
+            <td><a href="/edtatividade/<%= atividade._id %>">Editar</a></td>
+            <td><a href="/delatividade/<%= atividade._id %>">Delete</a></td>
+        </tr>
     <% }) %>
 </table>
-<%-include('rodape.ejs')%>
+
+<%- include('rodape.ejs') %>

@@ -3,28 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem de Alunos</title>
+    <title>Adicionar Aluno</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="submit"] {
+            margin-bottom: 10px;
+            width: calc(100% - 12px);
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <table>
-        <tr>
-            <th>Matricula</th>
-            <th>Nome</th>
-            <th>Identidade</th>
-            <th>Cpf</th>
-            <th>Email</th>
-        </tr>
+    <form method="post" enctype="multipart/form-data" style="border: 1px solid #ccc; padding: 20px; border-radius: 5px; background-color: #f9f9f9;">
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" required placeholder="Informe seu nome">
 
-        <%Alunos.forEach(function(aluno){%>
-            <tr>
-                <td><%=aluno.matricula%></td>
-                <td><%=aluno.titulo%></td>
-                <td><%=aluno.nome%></td>
-                <td><%=aluno.identidade%></td>
-                <td><%=aluno.cpf%></td>
-                <td><%=aluno.email%></td>
-            </tr>
-        <% }) %>
-    </table>
+        <label for="matricula">Matricula</label>
+        <input type="text" name="matricula" id="matricula" required placeholder="Informe sua matricula">
+       
+        <label for="identidade">Identidade</label>
+        <input type="number" name="identidade" id="identidade" required placeholder="Informe sua identidade"> 
+
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" required placeholder="Informe seu Email">
+               
+        <input type="submit" value="Adicionar">
+    </form>
 </body>
 </html>

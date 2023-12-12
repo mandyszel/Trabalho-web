@@ -1,24 +1,62 @@
-<%-include('cabecalho.ejs')%>
-<form method="post">
+<%- include('cabecalho.ejs') %>
 
+<style>
+    form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    label {
+        margin-bottom: 5px;
+    }
+
+    input[type='text'],
+    input[type='number'],
+    input[type='date'] {
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    input[type='submit'] {
+        padding: 8px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+
+    input[type='submit']:hover {
+        background-color: #4CAF50;
+    }
+</style>
+
+<form method="post">
     <label for="id">Id</label>
-    <input type="number" name="id" id="id" required readonly value="<%=equipe._id%>"><br>
+    <input type="number" name="id" id="id" required readonly value="<%=equipe._id%>">
     
     <label for="equipeidentificador">Identificador</label>
-    <input type="number" name="identificador" id="identificador" required placeholder="Informe o númeor identificador" value="<%=equipe.equipeidentificador%>"><br>
+    <input type="number" name="identificador" id="identificador" required placeholder="Número identificador da equipe" value="<%=equipe.equipeidentificador%>">
    
     <label for="nome">Nome</label> 
-    <input type="text" name="nome" id="nome" required placeholder="Informe o nome da equipe"value="<%=equipe.nome%>"><br>
+    <input type="text" name="nome" id="nome" required placeholder="Nome da equipe" value="<%=equipe.nome%>">
     
     <label for="cor">Cor</label>
-    <input type="text" name="cor" id="nome" required ="Infomr  cor da equipe" value="<%=equipe.cor%>"><br>
+    <input type="text" name="cor" id="cor" required placeholder="Cor da equipe" value="<%=equipe.cor%>">
     
     <label for="ano">Ano</label>
-    <input type="date" name="ano" id="ano" required="Informe o ano" value="<%=equipe.ano%>"><br>
+    <input type="date" name="ano" id="ano" required placeholder="Ano da equipe" value="<%=equipe.ano%>">
     
     <label for="integrantes">Número de integrantes</label>
-    <input type="number" name="integrantes" id="integrantes" required="Informe o número de integrantes" value="<%=equipe.integrantes%>"><br>
+    <input type="number" name="integrantes" id="integrantes" required placeholder="Número de integrantes" value="<%=equipe.integrantes%>">
     
     <input type="submit" value="Adicionar">
 </form>
-<%-include('rodape.ejs')%>
+
+<%- include('rodape.ejs') %>
