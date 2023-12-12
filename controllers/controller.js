@@ -1,6 +1,6 @@
 const Aluno = require("../models/Aluno");
 const Equipe = require("../models/Equipe");
-const Fiscal = require("../models/Fiscal"); 
+const Fiscal = require("../models/Fiscal");
 const Atividade = require("../models/Atividade");
 
 function abreindex(req, res) {
@@ -32,25 +32,26 @@ function addaluno(req, res) {
 }
 
 function listar(req, res) {
-  Aluno.find({}).then(function (alunos,err) {
-    if(err){
-      res.send(err.message)
-    }else{
-    res.render("lstaluno.ejs", { alunos: alunos });
+  Aluno.find({}).then(function (aluno, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.render("lstaluno.ejs", { aluno: aluno });
     }
   });
 }
 
 function pesquisaaluno(req, res) {
-  Aluno
-    .find({ nome: new RegExp(req.body.pesquisar, "i") })
-    .then(function (equipe, err) {
-      if (err) {
-        res.send(err.message);
-      } else {
-        res.render("lstaluno.ejs", { aluno: aluno });
-      }
-    });
+  Aluno.find({ matricula: new RegExp(req.body.pesquisar, "i") }).then(function (
+    aluno,
+    err
+  ) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.render("lstaluno.ejs", { aluno: aluno });
+    }
+  });
 }
 
 function abreedtaluno(req, res) {
@@ -63,26 +64,20 @@ function abreedtaluno(req, res) {
   });
 }
 
-function abreaddequipe(req, res) {
-  res.render("addequipe.ejs");
-}
-
 function edtaluno(req, res) {
-  Aluno
-    .findByIdAndUpdate(req.params.id, {
-      matricula: req.body.matricula,
-      nome: req.body.nome,
-      identidade: req.body.identidade,
-      cpf: req.body.cpf,
-      email: req.body.email,
-    })
-    .then(function (aluno, err) {
-      if (err) {
-        res.send(err.message);
-      } else {
-        res.redirect("/lstaluno");
-      }
-    });
+  Aluno.findByIdAndUpdate(req.params.id, {
+    matricula: req.body.matricula,
+    nome: req.body.nome,
+    identidade: req.body.identidade,
+    cpf: req.body.cpf,
+    email: req.body.email,
+  }).then(function (aluno, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.redirect("/lstaluno");
+    }
+  });
 }
 function delaluno(req, res) {
   Aluno.findByIdAndDelete(req.params.id).then(function (aluno, err) {
@@ -92,6 +87,9 @@ function delaluno(req, res) {
       res.redirect("/lstaluno");
     }
   });
+}
+function abreaddequipe(req, res) {
+  res.render("addequipe.ejs");
 }
 
 function addequipe(req, res) {
@@ -119,15 +117,15 @@ function lstequipe(req, res) {
 }
 
 function pesquisaequipe(req, res) {
-  Equipe
-    .find({ nome: new RegExp(req.body.pesquisar, "i") })
-    .then(function (equipe, err) {
-      if (err) {
-        res.send(err.message);
-      } else {
-        res.render("lstequipe.ejs", { equipe: equipe });
-      }
-    });
+  Equipe.find({
+    equipeidentificador: new RegExp(req.body.pesquisar, "i"),
+  }).then(function (equipe, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.render("lstequipe.ejs", { equipe: equipe });
+    }
+  });
 }
 
 function abreedtequipe(req, res) {
@@ -141,21 +139,19 @@ function abreedtequipe(req, res) {
 }
 
 function edtequipe(req, res) {
-  Equipe
-    .findByIdAndUpdate(req.params.id, {
+  Equipe.findByIdAndUpdate(req.params.id, {
     equipeidentificador: req.body.equipeidentificador,
     nome: req.body.nome,
     cor: req.body.cor,
     ano: req.body.ano,
     integrantes: req.body.integrantes,
-    })
-    .then(function (equipe, err) {
-      if (err) {
-        res.send(err.message);
-      } else {
-        res.redirect("/lstequipe");
-      }
-    });
+  }).then(function (equipe, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.redirect("/lstequipe");
+    }
+  });
 }
 
 function delequipe(req, res) {
@@ -169,7 +165,7 @@ function delequipe(req, res) {
 }
 
 function abreaddfiscal(req, res) {
-  Fiscal.find({}).then(function (fiscal, err) { 
+  Fiscal.find({}).then(function (fiscal, err) {
     if (err) {
       res.send(err.message);
     } else {
@@ -181,7 +177,7 @@ function abreaddfiscal(req, res) {
 function addfiscal(req, res) {
   let fiscal = new Fiscal({
     fiscalidentificador: req.body.fiscalidentificador,
-    nome: req.body.nome
+    nome: req.body.nome,
   });
   fiscal.save().then(function (docs, err) {
     console.log(docs);
@@ -190,7 +186,7 @@ function addfiscal(req, res) {
 }
 
 function lstfiscal(req, res) {
-  Fiscal.find({}).then(function (fiscal, err) { 
+  Fiscal.find({}).then(function (fiscal, err) {
     if (err) {
       res.send(err.message);
     } else {
@@ -200,15 +196,15 @@ function lstfiscal(req, res) {
 }
 
 function pesquisafiscal(req, res) {
-  Fiscal
-    .find({ fiscalidentificador: new RegExp(req.body.pesquisar, "i") })
-    .then(function (fiscal, err) {
-      if (err) {
-        res.send(err.message);
-      } else {
-        res.render("lstfiscal.ejs", { fiscal: fiscal });
-      }
-    });
+  Fiscal.find({
+    fiscalidentificador: new RegExp(req.body.pesquisar, "i"),
+  }).then(function (fiscal, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.render("lstfiscal.ejs", { fiscal: fiscal });
+    }
+  });
 }
 
 function abreedtfiscal(req, res) {
@@ -222,17 +218,15 @@ function abreedtfiscal(req, res) {
 }
 
 function edtfiscal(req, res) {
-  Fiscal
-    .findByIdAndUpdate(req.params.id, {
-      fiscalidentificador: req.body.fiscalidentificador,
-    })
-    .then(function (fiscal, err) {
-      if (err) {
-        res.send(err.message);
-      } else {
-        res.redirect("/lstfiscal");
-      }
-    });
+  Fiscal.findByIdAndUpdate(req.params.id, {
+    fiscalidentificador: req.body.fiscalidentificador,
+  }).then(function (fiscal, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.redirect("/lstfiscal");
+    }
+  });
 }
 
 function delfiscal(req, res) {
@@ -263,11 +257,11 @@ function addatividade(req, res) {
     local: req.body.local,
     pontuacao: req.body.pontuacao,
     numparticipantes: req.body.numparticipantes,
-    ano: req.body.ano
+    ano: req.body.ano,
   });
   atividade.save().then(function (docs, err) {
-      console.log(docs);
-      res.redirect("/addatividade");
+    console.log(docs);
+    res.redirect("/addatividade");
   });
 }
 
@@ -282,15 +276,15 @@ function lstatividade(req, res) {
 }
 
 function pesquisaatividade(req, res) {
-  Atividade
-    .find({ atividadeidentificador: new RegExp(req.body.pesquisar, "i") })
-    .then(function (atividade, err) {
-      if (err) {
-        res.send(err.message);
-      } else {
-        res.render("lstatividade.ejs", { atividade: atividade });
-      }
-    });
+  Atividade.find({
+    atividadeidentificador: new RegExp(req.body.pesquisar, "i"),
+  }).then(function (atividade, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.render("lstatividade.ejs", { atividade: atividade });
+    }
+  });
 }
 
 function abreedtatividade(req, res) {
@@ -304,23 +298,21 @@ function abreedtatividade(req, res) {
 }
 
 function edtatividade(req, res) {
-  Atividade
-    .findByIdAndUpdate(req.params.id, {
-      atividadeidentificador: req.body.atividadeidentificador,
-      nome: req.body.nome,
-      duracao: req.body.duracao,
-      local: req.body.local,
-      pontuacao: req.body.pontuacao,
-      numparticipantes: req.body.numparticipantes,
-      ano: req.body.ano
-    })
-    .then(function (atividade, err) {
-      if (err) {
-        res.send(err.message);
-      } else {
-        res.redirect("/lstatividade");
-      }
-    });
+  Atividade.findByIdAndUpdate(req.params.id, {
+    atividadeidentificador: req.body.atividadeidentificador,
+    nome: req.body.nome,
+    duracao: req.body.duracao,
+    local: req.body.local,
+    pontuacao: req.body.pontuacao,
+    numparticipantes: req.body.numparticipantes,
+    ano: req.body.ano,
+  }).then(function (atividade, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.redirect("/lstatividade");
+    }
+  });
 }
 
 function delatividade(req, res) {
@@ -332,7 +324,6 @@ function delatividade(req, res) {
     }
   });
 }
-
 
 module.exports = {
   abreindex,
@@ -363,5 +354,5 @@ module.exports = {
   pesquisaatividade,
   abreedtatividade,
   edtatividade,
-  delatividade
+  delatividade,
 };
