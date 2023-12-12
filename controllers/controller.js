@@ -266,13 +266,8 @@ function addatividade(req, res) {
     ano: req.body.ano
   });
   atividade.save().then(function (docs, err) {
-    if (err) {
-      console.log(err);
-      res.send(err.message);
-    } else {
       console.log(docs);
       res.redirect("/addatividade");
-    }
   });
 }
 
@@ -303,7 +298,7 @@ function abreedtatividade(req, res) {
     if (err) {
       res.send(err.message);
     } else {
-      res.render("edtatividade.ejs", { Atividade: atividade });
+      res.render("edtatividade.ejs", { atividade: atividade });
     }
   });
 }
