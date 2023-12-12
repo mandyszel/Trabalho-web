@@ -4,18 +4,18 @@ const controller = require("../controllers/controller");
 const multer = require("multer");
 const upload = multer({ dest: "./public" });
 
-router.get("/", function(req, res) {
-    res.render("index"); 
+router.get("/", function (req, res) {
+  res.render("index");
 });
 
 router.get("/addaluno", controller.abrealuno);
 router.post("/addaluno", upload.single("foto"), controller.addaluno);
 router.get("/lstaluno", controller.listar);
-router.post("/lstaluno",controller.pesquisaaluno)
+
+router.post("/lstaluno", controller.pesquisaaluno);
 router.get("/edtaluno/:id", controller.abreedtaluno);
 router.post("/edtaluno/:id", controller.edtaluno);
 router.get("/delaluno/:id", controller.delaluno);
-
 
 router.get("/addequipe", controller.abreaddequipe);
 router.post("/addequipe", controller.addequipe);
@@ -33,7 +33,6 @@ router.post("/lstfiscal", controller.pesquisafiscal);
 router.get("/edtfiscal/:id", controller.abreedtfiscal);
 router.post("/edtfiscal/:id", controller.edtfiscal);
 router.get("/delfiscal/:id", controller.delfiscal);
-
 
 router.get("/addatividade", controller.abreaddatividade);
 router.post("/addatividade", controller.addatividade);
