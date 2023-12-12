@@ -12,10 +12,9 @@ router.get("/addaluno", controller.abrealuno);
 router.post("/addaluno", upload.single("foto"), controller.addaluno);
 router.get("/lstaluno", controller.listar);
 router.post("/lstaluno",controller.pesquisaaluno)
-
-/*router.get("/edtaluno/:id", controller.abreedtaluno);
+router.get("/edtaluno/:id", controller.abreedtaluno);
 router.post("/edtaluno/:id", controller.edtaluno);
-router.get("/delaluno/:id", controller.delaluno);*/
+router.get("/delaluno/:id", controller.delaluno);
 
 
 router.get("/addequipe", controller.abreaddequipe);
@@ -23,6 +22,7 @@ router.post("/addequipe", controller.addequipe);
 router.get("/lstequipe", controller.lstequipe);
 router.post("/lstequipe", controller.pesquisaequipe);
 router.get("/edtequipe/:id", controller.abreedtequipe);
+
 router.post("/edtequipe/:id", controller.edtequipe);
 router.get("/delequipe/:id", controller.delequipe);
 

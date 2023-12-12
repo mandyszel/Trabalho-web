@@ -1,9 +1,7 @@
 const Aluno = require("../models/Aluno");
 const Equipe = require("../models/Equipe");
-const Fiscal = require("../models/Fiscal"); // Certifique-se de ter importado corretamente o modelo Fiscal
+const Fiscal = require("../models/Fiscal"); 
 const Atividade = require("../models/Atividade");
-const { Error } = require("mongoose");
-
 
 function abreindex(req, res) {
   res.render("index");
@@ -55,8 +53,45 @@ function pesquisaaluno(req, res) {
     });
 }
 
+function abreedtaluno(req, res) {
+  Aluno.findById(req.params.id).then(function (aluno, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.render("edtaluno.ejs", { aluno: aluno });
+    }
+  });
+}
+
 function abreaddequipe(req, res) {
   res.render("addequipe.ejs");
+}
+
+function edtaluno(req, res) {
+  Aluno
+    .findByIdAndUpdate(req.params.id, {
+      matricula: req.body.matricula,
+      nome: req.body.nome,
+      identidade: req.body.identidade,
+      cpf: req.body.cpf,
+      email: req.body.email,
+    })
+    .then(function (aluno, err) {
+      if (err) {
+        res.send(err.message);
+      } else {
+        res.redirect("/lstaluno");
+      }
+    });
+}
+function delaluno(req, res) {
+  Aluno.findByIdAndDelete(req.params.id).then(function (aluno, err) {
+    if (err) {
+      res.send(err.message);
+    } else {
+      res.redirect("/lstaluno");
+    }
+  });
 }
 
 function addequipe(req, res) {
@@ -106,7 +141,7 @@ function abreedtequipe(req, res) {
 }
 
 function edtequipe(req, res) {
-  equipe
+  Equipe
     .findByIdAndUpdate(req.params.id, {
     equipeidentificador: req.body.equipeidentificador,
     nome: req.body.nome,
@@ -124,7 +159,7 @@ function edtequipe(req, res) {
 }
 
 function delequipe(req, res) {
-  equipe.findByIdAndDelete(req.params.id).then(function (equipe, err) {
+  Equipe.findByIdAndDelete(req.params.id).then(function (equipe, err) {
     if (err) {
       res.send(err.message);
     } else {
@@ -134,7 +169,7 @@ function delequipe(req, res) {
 }
 
 function abreaddfiscal(req, res) {
-  Fiscal.find({}).then(function (fiscal, err) { // Use o modelo Fiscal aqui, em vez de usar `fiscal.find({})`
+  Fiscal.find({}).then(function (fiscal, err) { 
     if (err) {
       res.send(err.message);
     } else {
@@ -310,6 +345,9 @@ module.exports = {
   addaluno,
   listar,
   pesquisaaluno,
+  abreedtaluno,
+  edtaluno,
+  delaluno,
   abreaddequipe,
   addequipe,
   lstequipe,
