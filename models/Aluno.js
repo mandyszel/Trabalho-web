@@ -5,6 +5,7 @@ const AlunoSchema = new conexao.Schema({
   nome: String,
   identidade: String,
   cpf: String,
+  email: String,
   equipeidentificador: [
     {
       type: conexao.Schema.Types.ObjectId,
