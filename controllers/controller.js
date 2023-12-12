@@ -7,211 +7,208 @@ function abreindex(req, res) {
   res.render("index");
 }
 
-function abreeleitor(req, res) {
-  res.render("addeleitor");
+function abrealuno(req, res) {
+  res.render("addaluno");
 }
 
-function addeleitor(req, res) {
+function addaluno(req, res) {
+  let matricula = req.body.matricula;
   let nome = req.body.nome;
-  let titulo = req.body.titulo;
+  let identidade = req.body.identidade;
   let cpf = req.body.cpf;
-  let filiacao = req.body.filiacao;
-  let end = req.body.end;
-  let datanasc = req.body.datanasc;
+  let email = req.body.email;
 
-  let eleitor = new Eleitor({
+  let eleitor = new Aluno({
+    matricula: matricula,
     nome: nome,
-    titulo: titulo,
+    identidade: identidade,
     cpf: cpf,
-    filiacao: filiacao,
-    end: end,
-    datanasc: datanasc,
+    email: email,
   });
 
-  eleitor.save().then(function (docs) {
+  aluno.save().then(function (docs) {
     res.send("Salvo");
   });
 }
 
 function listar(req, res) {
-  Eleitor.find({}).then(function (eleitores) {
-    res.render("lsteleitor.ejs", { Eleitores: eleitores });
+  Aluno.find({}).then(function (alunos) {
+    res.render("lstaluno.ejs", { Alunos: alunos });
   });
 }
 
-function abreaddvaga(req, res) {
-  res.render("addvaga.ejs");
+function abreaddequipe(req, res) {
+  res.render("addequipe.ejs");
 }
 
-function addvaga(req, res) {
-  let v = new vaga({
-    nmrvaga: req.body.nmrvaga,
-    presidente: req.body.presidente,
-    governador: req.body.governador,
-    senador: req.body.senador,
-    depfed: req.body.depfed,
-    depestad: req.body.depestad,
+function addequipe(req, res) {
+  let equipe = new Equipe({
+    equipeidentificador: req.body.equipeidentificador,
+    nome: req.body.nome,
+    cor: req.body.cor,
+    ano: req.body.ano,
+    integrantes: req.body.integrantes,
   });
-  v.save().then(function (docs, err) {
+  equipe.save().then(function (docs, err) {
     console.log(docs);
-    res.redirect("/addvaga");
+    res.redirect("/addequipe");
   });
 }
 
-function lstvaga(req, res) {
-  vaga.find({}).then(function (vaga, err) {
+function lstequipe(req, res) {
+  equipe.find({}).then(function (equipe, err) {
     if (err) {
       res.send(err.message);
     } else {
-      res.render("lstvaga.ejs", { vaga: vaga });
+      res.render("lstequipe.ejs", { Equipe: equipe });
     }
   });
 }
 
-function pesquisavaga(req, res) {
-  vaga
+function pesquisaequipe(req, res) {
+  equipe
     .find({ nome: new RegExp(req.body.pesquisar, "i") })
-    .then(function (vaga, err) {
+    .then(function (equipe, err) {
       if (err) {
         res.send(err.message);
       } else {
-        res.render("lstvaga.ejs", { vaga: vaga });
+        res.render("lstequipe.ejs", { Equipe: equipe });
       }
     });
 }
 
-function abreedtvaga(req, res) {
-  vaga.findById(req.params.id).then(function (vaga, err) {
+function abreedtequipe(req, res) {
+  equipe.findById(req.params.id).then(function (equipe, err) {
     if (err) {
       res.send(err.message);
     } else {
-      res.render("edtvaga.ejs", { vaga: vaga });
+      res.render("edtequipe.ejs", { Equipe: equipe });
     }
   });
 }
 
-function edtvaga(req, res) {
-  vaga
+function edtequipe(req, res) {
+  equipe
     .findByIdAndUpdate(req.params.id, {
-      nmrvaga: req.body.nmrvaga,
-      presidente: req.body.presidente,
-      governador: req.body.governador,
-      senador: req.body.senador,
-      depfed: req.body.depfed,
-      depestad: req.body.depestad,
+    equipeidentificador: req.body.equipeidentificador,
+    nome: req.body.nome,
+    cor: req.body.cor,
+    ano: req.body.ano,
+    integrantes: req.body.integrantes,
     })
-    .then(function (vaga, err) {
+    .then(function (equipe, err) {
       if (err) {
         res.send(err.message);
       } else {
-        res.redirect("/lstvaga");
+        res.redirect("/lstequipe");
       }
     });
 }
 
-function delvaga(req, res) {
-  vaga.findByIdAndDelete(req.params.id).then(function (vaga, err) {
+function delequipe(req, res) {
+  equipe.findByIdAndDelete(req.params.id).then(function (equipe, err) {
     if (err) {
       res.send(err.message);
     } else {
-      res.redirect("/lstvaga");
+      res.redirect("/lstequipe");
     }
   });
 }
 
-function abreaddeleicao(req, res) {
-  eleicao.find({}).then(function (eleicao, err) {
+function abreaddfiscal(req, res) {
+  fiscal.find({}).then(function (fiscal, err) {
     if (err) {
       res.send(err.message);
     } else {
-      res.render("addeleicao.ejs", { eleicao: eleicao });
+      res.render("addfiscal.ejs", { Fiscal: fiscal });
     }
   });
 }
 
-function addeleicao(req, res) {
-  let eleicao = new eleicao({
-    eleicano: req.body.eleicano,
+function addefiscal(req, res) {
+  let fiscal = new Fiscal({
+    fiscalidentificador: req.body.fiscalidentificador,
+    nome: req.body.nome
   });
-  eleicao.save().then(function (docs, err) {
+  fiscal.save().then(function (docs, err) {
     console.log(docs);
-    res.redirect("/addeleicao");
+    res.redirect("/addfiscal");
   });
 }
 
-function lsteleicao(req, res) {
-  eleicao.find({}).then(function (eleicao, err) {
+function lstfiscal(req, res) {
+  fiscal.find({}).then(function (fiscal, err) {
     if (err) {
       res.send(err.message);
     } else {
-      res.render("lsteleicao.ejs", { eleicao: eleicao });
+      res.render("lstfiscal.ejs", { Fiscal: fiscal });
     }
   });
 }
 
-function pesquisaeleicao(req, res) {
-  eleicao
-    .find({ eleicano: new RegExp(req.body.pesquisar, "i") })
-    .then(function (eleicao, err) {
+function pesquisafiscal(req, res) {
+  fiscal
+    .find({ fiscalidentificador: new RegExp(req.body.pesquisar, "i") })
+    .then(function (fiscal, err) {
       if (err) {
         res.send(err.message);
       } else {
-        res.render("lsteleicao.ejs", { eleicao: eleicao });
+        res.render("lstfiscal.ejs", { Fiscal: fiscal });
       }
     });
 }
 
-function abreedteleicao(req, res) {
-  eleicao.findById(req.params.id).then(function (eleicao, err) {
+function abreedtfiscal(req, res) {
+  fiscal.findById(req.params.id).then(function (fiscal, err) {
     if (err) {
       res.send(err.message);
     } else {
-      res.render("edteleicao.ejs", { eleicao: eleicao });
+      res.render("edtfiscal.ejs", { Fiscal: fiscal });
     }
   });
 }
 
-function edteleicao(req, res) {
-  eleicao
+function edtfiscal(req, res) {
+  fiscal
     .findByIdAndUpdate(req.params.id, {
-      eleicano: req.body.eleicano,
+      fiscalidentificador: req.body.fiscalidentificador,
     })
-    .then(function (eleicao, err) {
+    .then(function (fiscal, err) {
       if (err) {
         res.send(err.message);
       } else {
-        res.redirect("/lsteleicao");
+        res.redirect("/lstfiscal");
       }
     });
 }
 
-function deleleicao(req, res) {
-  eleicao.findByIdAndDelete(req.params.id).then(function (eleicao, err) {
+function delfiscal(req, res) {
+  fiscal.findByIdAndDelete(req.params.id).then(function (fiscal, err) {
     if (err) {
       res.send(err.message);
     } else {
-      res.redirect("/lsteleicao");
+      res.redirect("/lstfiscal");
     }
   });
 }
 
 module.exports = {
   abreindex,
-  abreeleitor,
-  addeleitor,
+  abrealuno,
+  addaluno,
   listar,
-  abreaddvaga,
-  addvaga,
-  lstvaga,
-  pesquisavaga,
-  delvaga,
-  abreedtvaga,
-  edtvaga,
-  abreaddeleicao,
-  addeleicao,
-  lsteleicao,
-  pesquisaeleicao,
-  deleleicao,
-  abreedteleicao,
-  edteleicao,
+  abreaddequipe,
+  addequipe,
+  lstequipe,
+  pesquisaequipe,
+  delequipe,
+  abreedtequipe,
+  edtequipe,
+  abreaddfiscal,
+  addefiscal,
+  lstfiscal,
+  pesquisafiscal,
+  delfiscal,
+  abreedtfiscal,
+  edtfiscal,
 };
