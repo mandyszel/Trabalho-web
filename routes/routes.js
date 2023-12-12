@@ -4,7 +4,9 @@ const controller = require("../controllers/controller");
 const multer = require("multer");
 const upload = multer({ dest: "./public" });
 
-router.get("/", controller.abreindex);
+router.get("/", function(req, res) {
+    res.render("index"); 
+});
 
 router.get("/addaluno", controller.abrealuno);
 router.post("/addaluno", upload.single("foto"), controller.addaluno);
@@ -36,6 +38,3 @@ router.post("/edtatividade/:id", controller.edtatividade);
 router.get("/delatividade/:id", controller.delatividade);
 
 module.exports = router;
-
-
-
